@@ -14,7 +14,7 @@
             <div class="menu-desktop">
               <ul class="main-menu">
                 <li :class="getActive('index')">
-                  <NuxtLink to="/">Home</NuxtLink>
+                  <NuxtLink to="/">Trang Chủ</NuxtLink>
                   <!-- <ul class="sub-menu">
                     <li><a href="index.html">Homepage 1</a></li>
                     <li><a href="home-02.html">Homepage 2</a></li>
@@ -23,15 +23,15 @@
                 </li>
 
                 <li :class="getActive('shop')">
-                  <NuxtLink data-label="hot" to="/shop">Shop</NuxtLink>
+                  <NuxtLink data-label="hot" to="/shop">Sản Phẩm</NuxtLink>
                 </li>
 
                 <li :class="getActive('about')">
-                  <NuxtLink to="/about">About</NuxtLink>
+                  <NuxtLink to="/about">Giới Thiệu</NuxtLink>
                 </li>
 
                 <li :class="getActive('contact')">
-                  <NuxtLink to="/contact">Contact</NuxtLink>
+                  <NuxtLink to="/contact">Liên Hệ</NuxtLink>
                 </li>
               </ul>
             </div>
@@ -79,28 +79,25 @@
       <!-- Menu Mobile -->
       <div class="menu-mobile">
         <ul class="main-menu-m">
-          <li>
-            <NuxtLink to="/">Home</NuxtLink>
+          <li :class="'menu-link '+getActive('index')">
+            <NuxtLink to="/">Trang Chủ</NuxtLink>
             <!-- <ul class="sub-menu-m">
               <li><a href="index.html">Homepage 1</a></li>
               <li><a href="home-02.html">Homepage 2</a></li>
               <li><a href="home-03.html">Homepage 3</a></li>
             </ul> -->
-            <span class="arrow-main-menu-m">
-              <i class="fa fa-angle-right" aria-hidden="true"></i>
-            </span>
           </li>
 
-          <li>
-            <NuxtLink data-label1="hot" to="/shop">Shop</NuxtLink>
+          <li :class="'menu-link '+getActive('shop')">
+            <NuxtLink data-label1="hot" to="/shop">Sản Phẩm</NuxtLink>
           </li>
 
-          <li>
-            <NuxtLink to="/about">About</NuxtLink>
+          <li :class="'menu-link '+getActive('about')">
+            <NuxtLink to="/about">Giới Thiệu</NuxtLink>
           </li>
 
-          <li>
-            <NuxtLink to="/contact">Contact</NuxtLink>
+          <li :class="'menu-link '+getActive('contact')">
+            <NuxtLink to="/contact">Liên Hệ</NuxtLink>
           </li>
         </ul>
       </div>
@@ -145,13 +142,15 @@
 
         <div class="header-cart-content flex-w js-pscroll">
           <ul class="header-cart-wrapitem w-full">
+            <li v-if="!cart.length">Trống</li>
             <li
               v-for="(product, index) in cart"
               :key="index"
               class="header-cart-item flex-w flex-t m-b-12"
             >
-              <div class="header-cart-item-img"
-              @click="() => onRemoveCart(product.id)"
+              <div
+                class="header-cart-item-img"
+                @click="() => onRemoveCart(product.id)"
               >
                 <img
                   :src="'/images/products/' + product.product.images[0]"
@@ -176,33 +175,25 @@
               </div>
             </li>
           </ul>
+        </div>
+        <div class="w-full">
+          <div class="header-cart-total w-full p-tb-20">
+            Total:
+            {{
+              cart
+                .map((p) => Number(p.product.price.replace(/[^0-9.-]+/g, "")))
+                .reduce((a, b) => a + b, 0)
+            }}
+            VNĐ
+          </div>
 
-          <div class="w-full">
-            <div class="header-cart-total w-full p-tb-40">
-              Total:
-              {{
-                cart
-                  .map((p) => Number(p.product.price.replace(/[^0-9.-]+/g, "")))
-                  .reduce((a, b) => a + b, 0)
-              }}
-              VNĐ
-            </div>
-
-            <div class="header-cart-buttons flex-w w-full">
-              <nuxt-link
-                to="/cart"
-                class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10"
-              >
-                <span @click="() => onCloseCart()">XEM GIỎ HÀNG</span>
-              </nuxt-link>
-
-              <nuxt-link
-                @click="onCloseCart"
-                to="/cart"
-                class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10"
-                ><span @click="() => onCloseCart()">THANH TOÁN</span>
-              </nuxt-link>
-            </div>
+          <div class="header-cart-buttons flex-w w-full m-b-50">
+            <nuxt-link
+              @click="onCloseCart"
+              to="/cart"
+              class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10"
+              ><span @click="() => onCloseCart()">THANH TOÁN</span>
+            </nuxt-link>
           </div>
         </div>
       </div>
@@ -213,7 +204,7 @@
       <div class="container">
         <div class="row">
           <div class="col-sm-6 col-lg-3 p-b-50">
-            <h4 class="stext-301 cl0 p-b-30">Categories</h4>
+            <h4 class="stext-301 cl0 p-b-30">Thể Loại</h4>
 
             <ul>
               <li class="p-b-10">
@@ -235,7 +226,7 @@
           </div>
 
           <div class="col-sm-6 col-lg-3 p-b-50">
-            <h4 class="stext-301 cl0 p-b-30">Help</h4>
+            <h4 class="stext-301 cl0 p-b-30">Hỗ Trợ</h4>
 
             <ul>
               <li class="p-b-10">
@@ -261,89 +252,29 @@
           </div>
 
           <div class="col-sm-6 col-lg-3 p-b-50">
-            <h4 class="stext-301 cl0 p-b-30">GET IN TOUCH</h4>
+            <h4 class="stext-301 cl0 p-b-30">Liên Hệ</h4>
 
             <p class="stext-107 cl7 size-201">
-              Any questions? Let us know in store at 8th floor, 379 Hudson St,
-              New York, NY 10018 or call us on (+1) 96 716 6879
+              Ghé shop tại số 10, đường số 1, khu phố 5, phường Hiệp Bình Chánh,
+              quận Thủ Đức, Hồ Chí Minh, Việt Nam
             </p>
 
             <div class="p-t-27">
-              <a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
+              <a
+                href="https://www.facebook.com/nsoulclothing"
+                class="fs-18 cl7 hov-cl1 trans-04 m-r-16"
+              >
                 <i class="fa fa-facebook"></i>
               </a>
 
-              <a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
+              <a
+                href="https://www.instagram.com/nsoulclothing/"
+                class="fs-18 cl7 hov-cl1 trans-04 m-r-16"
+              >
                 <i class="fa fa-instagram"></i>
-              </a>
-
-              <a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
-                <i class="fa fa-pinterest-p"></i>
               </a>
             </div>
           </div>
-
-          <div class="col-sm-6 col-lg-3 p-b-50">
-            <h4 class="stext-301 cl0 p-b-30">Newsletter</h4>
-
-            <form>
-              <div class="wrap-input1 w-full p-b-4">
-                <input
-                  class="input1 bg-none plh1 stext-107 cl7"
-                  type="text"
-                  name="email"
-                  placeholder="email@example.com"
-                />
-                <div class="focus-input1 trans-04"></div>
-              </div>
-
-              <div class="p-t-18">
-                <button
-                  class="flex-c-m stext-101 cl0 size-103 bg1 bor1 hov-btn2 p-lr-15 trans-04"
-                >
-                  Subscribe
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-
-        <div class="p-t-40">
-          <div class="flex-c-m flex-w p-b-18">
-            <a href="#" class="m-all-1">
-              <img src="/images/icons/icon-pay-01.png" alt="ICON-PAY" />
-            </a>
-
-            <a href="#" class="m-all-1">
-              <img src="/images/icons/icon-pay-02.png" alt="ICON-PAY" />
-            </a>
-
-            <a href="#" class="m-all-1">
-              <img src="/images/icons/icon-pay-03.png" alt="ICON-PAY" />
-            </a>
-
-            <a href="#" class="m-all-1">
-              <img src="/images/icons/icon-pay-04.png" alt="ICON-PAY" />
-            </a>
-
-            <a href="#" class="m-all-1">
-              <img src="/images/icons/icon-pay-05.png" alt="ICON-PAY" />
-            </a>
-          </div>
-
-          <p class="stext-107 cl6 txt-center">
-            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-            Copyright &copy;
-            <script>
-              document.write(new Date().getFullYear());
-            </script>
-            All rights reserved | This template is made with
-            <i class="fa fa-heart-o" aria-hidden="true"></i> by
-            <a href="https://colorlib.com" target="_blank">Colorlib</a>.
-            Downloaded from
-            <a href="https://themeslab.org/" target="_blank">Themeslab</a>
-            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-          </p>
         </div>
       </div>
     </footer>
@@ -354,16 +285,6 @@
         <i class="zmdi zmdi-chevron-up"></i>
       </span>
     </div>
-
-    <!-- facebook -->
-    <!-- Messenger Chat Plugin Code -->
-    <div id="fb-root"></div>
-    <!-- Your Chat Plugin code -->
-    <div
-      class="fb-customerchat"
-      attribution="page_inbox"
-      page_id="110467184476960"
-    ></div>
   </div>
 </template>
 
@@ -436,7 +357,7 @@ export default {
     ],
   },
   created() {
-    this.$root.$on('cartChange', this.cartChange)
+    this.$root.$on("cartChange", this.cartChange);
   },
   data() {
     return {
@@ -453,16 +374,26 @@ export default {
     },
     cartChange: function () {
       this.cart = JSON.parse(localStorage.getItem("CozaShopCart")) || [];
-      this.count = this.cart.reduce(function(acc, val) { return acc + val.amount; }, 0)
+      this.count = this.cart.reduce(function (acc, val) {
+        return acc + val.amount;
+      }, 0);
     },
     onRemoveCart: function (id) {
-      localStorage.setItem("CozaShopCart", JSON.stringify(this.cart.filter(c => c.id != id)));
-      this.cartChange()
-    }
+      localStorage.setItem(
+        "CozaShopCart",
+        JSON.stringify(this.cart.filter((c) => c.id != id))
+      );
+      this.cartChange();
+    },
   },
   mounted() {
     this.cart = JSON.parse(localStorage.getItem("CozaShopCart")) || [];
-    this.count = this.cart.reduce(function(acc, val) { return acc + val.amount; }, 0) 
+    this.count = this.cart.reduce(function (acc, val) {
+      return acc + val.amount;
+    }, 0);
+    $(".menu-link").on("click", function () {
+      $(".menu-mobile").slideToggle();
+    })
     $(".js-show-cart").on("click", function () {
       $(".js-panel-cart").addClass("show-header-cart");
     });
@@ -536,28 +467,10 @@ export default {
         $(wrapMenu).css("top", posWrapHeader - $(this).scrollTop());
       }
     });
-
-    // facebook
-    window.fbAsyncInit = function () {
-      FB.init({
-        xfbml: true,
-        version: "v10.0",
-      });
-    };
-
-    (function (d, s, id) {
-      var js,
-        fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s);
-      js.id = id;
-      js.src = "https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js";
-      fjs.parentNode.insertBefore(js, fjs);
-    })(document, "script", "facebook-jssdk");
   },
   destroyed() {
-    this.$root.$off('cartChange', this.cartChange)
-  }
+    this.$root.$off("cartChange", this.cartChange);
+  },
 };
 </script>
 

@@ -19,6 +19,12 @@ export default {
     };
   },
   mounted() {
+    $(".js-select2").each(function () {
+      $(this).select2({
+        minimumResultsForSearch: 20,
+        dropdownParent: $(this).next(".dropDownSelect2"),
+      });
+    });
     if (this.$route.query.id) {
       this.product = [...products].find(p => p.id == this.$route.query.id)
     }

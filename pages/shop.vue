@@ -1,21 +1,34 @@
 <template>
-  <div class="bg0 p-t-80 p-b-140">
+  <div class="bg0 banner p-b-140">
     <div class="container">
       <div class="flex-w flex-sb-m p-b-52">
         <div class="flex-w flex-l-m filter-tope-group m-tb-10">
           <button
-            :class="isSelectAll == -1 ? 'stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1' : 'stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5'"
+            :class="
+              isSelectAll == -1
+                ? 'stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1'
+                : 'stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5'
+            "
             data-filter="*"
             @click="onSelectAll()"
           >
-            All Products
+            Tất Cả
           </button>
 
           <button
             :key="cate"
             v-for="(cate, index) in getCategories"
-            @click="onSelectCategory(cate, index)"
-            :class="isSelectAll == index ? 'stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1' : 'stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5'"
+            @click="
+              () => {
+                onSelectCategory(cate, index);
+                onReplace(cate);
+              }
+            "
+            :class="
+              isSelectAll == index
+                ? 'stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1'
+                : 'stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5'
+            "
           >
             {{ cate }}
           </button>
@@ -32,13 +45,23 @@ import products from "@/static/data/product.json";
 
 export default {
   created() {
+    let cate = this.$route.query.category
+      ? this.$route.query.category.toString()
+      : "";
+    let category = this.getCategories.find(
+      (c) => c.toLowerCase() == cate.toLowerCase()
+    );
+    if (category) {
+      this.onSelectCategory(cate, this.getCategories.indexOf(category));
+    }
   },
   data: () => ({
     data: products,
-    isSelectAll: -1
+    isSelectAll: -1,
+    isClientSide: typeof window !== "undefined",
   }),
   computed: {
-    getCategories: function() {
+    getCategories: function () {
       let categories =
         [].concat.apply(
           [],
@@ -60,6 +83,28 @@ export default {
     onSelectAll() {
       this.data = products;
       this.isSelectAll = -1;
+    },
+    onReplace(cate) {
+      if (this.isClientSide) {
+        window.history.pushState(
+          null,
+          "",
+          this.updateQueryStringParameter(
+            window.location.href,
+            "category",
+            cate
+          ) || window.location.href
+        );
+      }
+    },
+    updateQueryStringParameter(uri, key, value) {
+      var re = new RegExp("([?&])" + key + "=.*?(&|$)", "i");
+      var separator = uri.indexOf("?") !== -1 ? "&" : "?";
+      if (uri.match(re)) {
+        return uri.replace(re, "$1" + key + "=" + value + "$2");
+      } else {
+        return uri + separator + key + "=" + value;
+      }
     },
   },
   components: { ProductList },
@@ -126,5 +171,10 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+@media screen and (min-width: 769px) {
+  .banner {
+    padding-top: 80px;
+  }
+}
 </style>

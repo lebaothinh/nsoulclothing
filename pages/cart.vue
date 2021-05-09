@@ -7,11 +7,11 @@
             <div class="wrap-table-shopping-cart">
               <table class="table-shopping-cart">
                 <tr class="table_head">
-                  <th class="column-1">Product</th>
+                  <th class="column-1">Sản Phẩm</th>
                   <th class="column-2"></th>
-                  <th class="column-3">Price</th>
-                  <th class="column-4">Quantity</th>
-                  <th class="column-5">Total</th>
+                  <th class="column-3">Giá</th>
+                  <th class="column-4">Số Lượng</th>
+                  <th class="column-5">Tổng</th>
                 </tr>
 
                 <tr
@@ -20,7 +20,7 @@
                   class="table_row"
                 >
                   <td class="column-1">
-                    <div class="how-itemcart1">
+                    <div class="how-itemcart1" @click="() => onRemoveCart(product.id)">
                       <img
                         :src="'images/products/' + product.product.images[0]"
                         alt="IMG"
@@ -36,6 +36,7 @@
                   <td class="column-4">
                     <div class="wrap-num-product flex-w m-l-auto m-r-0">
                       <div
+                        @click="onChangeQuantity(product.id, false)"
                         class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m"
                       >
                         <i class="fs-16 zmdi zmdi-minus"></i>
@@ -49,6 +50,7 @@
                       />
 
                       <div
+                        @click="onChangeQuantity(product.id, true)"
                         class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m"
                       >
                         <i class="fs-16 zmdi zmdi-plus"></i>
@@ -153,19 +155,23 @@ export default {
   methods: {
     onOrder: function (e) {
       e.preventDefault();
-	  let products = '';
-	  this.cart.forEach((product, index) => {
-		  products+= `${index+1}. - ID:${product.product.id} | SKU: ${product.product.sku} - ${product.product.title} (Size ${product.size}, ${product.color} ${product.amount} cái)\n`
-	  })
+      let products = "";
+      this.cart.forEach((product, index) => {
+        products += `${index + 1}. - ID:${product.product.id} | SKU: ${
+          product.product.sku
+        } - ${product.product.title} (Size ${product.size}, ${product.color} ${
+          product.amount
+        } cái)\n`;
+      });
 
       if (this.name && this.phoneNumber && this.address) {
         this.$axios
           .post(`https://formspree.io/f/mleadkya`, {
-			  ['Tên Khách Hàng']: this.name,
-			  ['Số Điện Thoại']: this.phoneNumber,
-			  ['Địa chỉ']: this.address,
-			  ['Sản phẩm đặt mua']: products
-		  })
+            ["Tên Khách Hàng"]: this.name,
+            ["Số Điện Thoại"]: this.phoneNumber,
+            ["Địa chỉ"]: this.address,
+            ["Sản phẩm đặt mua"]: products,
+          })
           .then(function (response) {
             swal(
               "Đặt Hàng Thành Công!",
@@ -184,6 +190,26 @@ export default {
         swal("Thiếu thông tin!", "Vui lòng điền đầy đủ thông tin!", "info");
       }
     },
+    onRemoveCart: function (id) {
+      localStorage.setItem(
+        "CozaShopCart",
+        JSON.stringify(this.cart.filter((c) => c.id != id))
+      );
+      this.$root.$emit('cartChange');
+      this.cart = JSON.parse(localStorage.getItem("CozaShopCart")) || [];
+    },
+    onChangeQuantity: function (id, isInc) {
+      this.cart = this.cart.map(p => {
+        if (p.id == id) {
+          p.amount = isInc ? p.amount+1 : p.amount-1
+        }
+        return p 
+      })
+      localStorage.setItem(
+        "CozaShopCart",
+        JSON.stringify(this.cart)
+      );
+    } 
   },
   computed: {
     getTotal: function () {
