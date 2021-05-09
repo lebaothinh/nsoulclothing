@@ -1,1 +1,0 @@
-__NUXT_JSONP__("/shop/women", {data:[{}],fetch:{},mutations:void 0});
