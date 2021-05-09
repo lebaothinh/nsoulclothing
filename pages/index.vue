@@ -7,7 +7,7 @@
           <div class="col-md-6 col-xl-4 p-b-30 m-lr-auto">
             <!-- Block1 -->
             <div class="block1 wrap-pic-w">
-              <img src="@/static/images/banner-01.jpg" alt="IMG-BANNER" />
+              <img src="/images/banner-01.jpg" alt="IMG-BANNER" />
 
               <NuxtLink
                 to="/shop/women"
@@ -33,7 +33,7 @@
           <div class="col-md-6 col-xl-4 p-b-30 m-lr-auto">
             <!-- Block1 -->
             <div class="block1 wrap-pic-w">
-              <img src="@/static/images/banner-02.jpg" alt="IMG-BANNER" />
+              <img src="/images/banner-02.jpg" alt="IMG-BANNER" />
 
               <NuxtLink
                 to="/shop/men"
@@ -59,7 +59,7 @@
           <div class="col-md-6 col-xl-4 p-b-30 m-lr-auto">
             <!-- Block1 -->
             <div class="block1 wrap-pic-w">
-              <img src="@/static/images/banner-03.jpg" alt="IMG-BANNER" />
+              <img src="/images/banner-03.jpg" alt="IMG-BANNER" />
 
               <NuxtLink
                 to="/shop"
@@ -110,7 +110,7 @@
 
 <script>
 import ProductList from '../components/Product/ProductList.vue';
-import products from "@/static/data/product.json";
+import products from "/data/product.json";
 
 export default {
   components: { ProductList },
