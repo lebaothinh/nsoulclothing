@@ -7,7 +7,7 @@
           <nav class="limiter-menu-desktop container" style="min-height: unset">
             <!-- Logo desktop -->
             <nuxt-link to="/" class="logo">
-              <img src="@/assets/images/icons/logo-01.png" alt="IMG-LOGO" />
+              <img src="@/static/images/icons/logo-01.png" alt="IMG-LOGO" />
             </nuxt-link>
 
             <!-- Menu desktop -->
@@ -54,7 +54,7 @@
         <!-- Logo moblie -->
         <div class="logo-mobile">
           <NuxtLink to="/"
-            ><img src="@/assets/images/icons/logo-01.png" alt="IMG-LOGO"
+            ><img src="@/static/images/icons/logo-01.png" alt="IMG-LOGO"
           /></NuxtLink>
         </div>
 
@@ -111,7 +111,7 @@
           <button
             class="flex-c-m btn-hide-modal-search trans-04 js-hide-modal-search"
           >
-            <img src="@/assets/images/icons/icon-close2.png" alt="CLOSE" />
+            <img src="@/static/images/icons/icon-close2.png" alt="CLOSE" />
           </button>
 
           <form class="wrap-search-header flex-w p-l-15">
@@ -309,23 +309,23 @@
         <div class="p-t-40">
           <div class="flex-c-m flex-w p-b-18">
             <a href="#" class="m-all-1">
-              <img src="@/assets/images/icons/icon-pay-01.png" alt="ICON-PAY" />
+              <img src="@/static/images/icons/icon-pay-01.png" alt="ICON-PAY" />
             </a>
 
             <a href="#" class="m-all-1">
-              <img src="@/assets/images/icons/icon-pay-02.png" alt="ICON-PAY" />
+              <img src="@/static/images/icons/icon-pay-02.png" alt="ICON-PAY" />
             </a>
 
             <a href="#" class="m-all-1">
-              <img src="@/assets/images/icons/icon-pay-03.png" alt="ICON-PAY" />
+              <img src="@/static/images/icons/icon-pay-03.png" alt="ICON-PAY" />
             </a>
 
             <a href="#" class="m-all-1">
-              <img src="@/assets/images/icons/icon-pay-04.png" alt="ICON-PAY" />
+              <img src="@/static/images/icons/icon-pay-04.png" alt="ICON-PAY" />
             </a>
 
             <a href="#" class="m-all-1">
-              <img src="@/assets/images/icons/icon-pay-05.png" alt="ICON-PAY" />
+              <img src="@/static/images/icons/icon-pay-05.png" alt="ICON-PAY" />
             </a>
           </div>
 

@@ -2,7 +2,7 @@
   "name": "CozaShop",
   "version": "1.0.0",
   "private": true,
-  "homepage": "https://lebaothinh.github.io/nsoulclothing",
+  "homepage": "https://lebaothinh.github.io/nsoulclothing.github.io",
   "scripts": {
     "dev": "nuxt",
     "build": "nuxt build",

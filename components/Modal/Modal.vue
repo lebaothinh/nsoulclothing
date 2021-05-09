@@ -7,7 +7,7 @@
           <button class="how-pos3 hov3 trans-04 js-hide-modal1" @click="() => {
               this.$emit('close')
           }">
-            <img src="@/assets/images/icons/icon-close.png" alt="CLOSE" />
+            <img src="@/static/images/icons/icon-close.png" alt="CLOSE" />
           </button>
           <slot></slot>
         </div>

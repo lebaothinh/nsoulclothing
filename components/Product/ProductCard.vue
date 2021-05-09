@@ -41,12 +41,12 @@
         <a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
           <img
             class="icon-heart1 dis-block trans-04"
-            src="@/assets/images/icons/icon-heart-01.png"
+            src="@/static/images/icons/icon-heart-01.png"
             alt="ICON"
           />
           <img
             class="icon-heart2 dis-block trans-04 ab-t-l"
-            src="@/assets/images/icons/icon-heart-02.png"
+            src="@/static/images/icons/icon-heart-02.png"
             alt="ICON"
           />
         </a>
