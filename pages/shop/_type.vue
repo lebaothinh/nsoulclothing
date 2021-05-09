@@ -27,10 +27,13 @@
 </template>
 
 <script>
-import ProductList from "../components/Product/ProductList.vue";
-import products from "../static/data/product.json";
+import ProductList from "../../components/Product/ProductList.vue";
+import products from "@/static/data/product.json";
 
 export default {
+  created() {
+    console.log(this.$route)
+  },
   data: () => ({
     data: products,
     isSelectAll: -1

@@ -53,9 +53,9 @@
       <div class="wrap-header-mobile">
         <!-- Logo moblie -->
         <div class="logo-mobile">
-          <a href="index.html"
+          <NuxtLink to="/"
             ><img src="@/assets/images/icons/logo-01.png" alt="IMG-LOGO"
-          /></a>
+          /></NuxtLink>
         </div>
 
         <!-- Icon header -->
