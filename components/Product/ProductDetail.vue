@@ -450,6 +450,7 @@ export default {
           _product.amount += this.amount;
         } else {
           cart.push({
+            id: Date.now() + cart.length,
             product: this.product,
             size: this.size,
             color: this.color,
@@ -458,6 +459,8 @@ export default {
         }
 
         localStorage.setItem("CozaShopCart", JSON.stringify(cart));
+        swal('Thêm Vào Giỏ Hàng',"Thành Công!", "success");
+        this.$root.$emit('cartChange')
       } catch (e) {}
     },
   },

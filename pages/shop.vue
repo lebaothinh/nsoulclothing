@@ -109,18 +109,6 @@ export default {
         $(this).off("click");
       });
     });
-    $(".js-addcart-detail").each(function () {
-      var nameProduct = $(this)
-        .parent()
-        .parent()
-        .parent()
-        .parent()
-        .find(".js-name-detail")
-        .html();
-      $(this).on("click", function () {
-        swal('Thêm Vào Giỏ Hàng',"Thành Công!", "success");
-      });
-    });
     $(".js-pscroll").each(function () {
       $(this).css("position", "relative");
       $(this).css("overflow", "hidden");

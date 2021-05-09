@@ -40,7 +40,7 @@
             <div class="wrap-icon-header flex-w flex-r-m">
               <div
                 class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart"
-                :data-notify="this.cart.reduce(function(acc, val) { return acc + val.amount; }, 0)"
+                :data-notify="this.count"
               >
                 <i class="zmdi zmdi-shopping-cart"></i>
               </div>
@@ -62,7 +62,7 @@
         <div class="wrap-icon-header flex-w flex-r-m m-r-15">
           <div
             class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart"
-            :data-notify="this.cart.reduce(function(acc, val) { return acc + val.amount; }, 0)"
+            :data-notify="this.count"
           >
             <i class="zmdi zmdi-shopping-cart"></i>
           </div>
@@ -150,7 +150,9 @@
               :key="index"
               class="header-cart-item flex-w flex-t m-b-12"
             >
-              <div class="header-cart-item-img">
+              <div class="header-cart-item-img"
+              @click="() => onRemoveCart(product.id)"
+              >
                 <img
                   :src="'/images/products/' + product.product.images[0]"
                   alt="IMG"
@@ -433,9 +435,13 @@ export default {
       },
     ],
   },
+  created() {
+    this.$root.$on('cartChange', this.cartChange)
+  },
   data() {
     return {
       cart: [],
+      count: 0,
     };
   },
   methods: {
@@ -445,10 +451,18 @@ export default {
     getActive: function (path) {
       return this.$route.name == path ? "active-menu" : "";
     },
+    cartChange: function () {
+      this.cart = JSON.parse(localStorage.getItem("CozaShopCart")) || [];
+      this.count = this.cart.reduce(function(acc, val) { return acc + val.amount; }, 0)
+    },
+    onRemoveCart: function (id) {
+      localStorage.setItem("CozaShopCart", JSON.stringify(this.cart.filter(c => c.id != id)));
+      this.cartChange()
+    }
   },
   mounted() {
     this.cart = JSON.parse(localStorage.getItem("CozaShopCart")) || [];
-
+    this.count = this.cart.reduce(function(acc, val) { return acc + val.amount; }, 0) 
     $(".js-show-cart").on("click", function () {
       $(".js-panel-cart").addClass("show-header-cart");
     });
@@ -541,6 +555,9 @@ export default {
       fjs.parentNode.insertBefore(js, fjs);
     })(document, "script", "facebook-jssdk");
   },
+  destroyed() {
+    this.$root.$off('cartChange', this.cartChange)
+  }
 };
 </script>
 

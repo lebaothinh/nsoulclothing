@@ -23,9 +23,9 @@ export default {
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
     "@/static/vendor/bootstrap/css/bootstrap.min.css",
-    "@/assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css",
-    "@/assets/fonts/iconic/css/material-design-iconic-font.min.css",
-    "@/assets/fonts/linearicons-v1.0.0/icon-font.min.css",
+    "@/static/fonts/font-awesome-4.7.0/css/font-awesome.min.css",
+    "@/static/fonts/iconic/css/material-design-iconic-font.min.css",
+    "@/static/fonts/linearicons-v1.0.0/icon-font.min.css",
     "@/static/vendor/animate/animate.css",
     "@/static/vendor/css-hamburgers/hamburgers.min.css",
     "@/static/vendor/animsition/css/animsition.min.css",
@@ -34,8 +34,8 @@ export default {
     "@/static/vendor/slick/slick.css",
     "@/static/vendor/MagnificPopup/magnific-popup.css",
     "@/static/vendor/perfect-scrollbar/perfect-scrollbar.css",
-    "@/assets/css/util.css",
-    "@/assets/css/main.css"
+    "@/static/css/util.css",
+    "@/static/css/main.css"
   ],
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [],
