@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import ProductList from "../../components/Product/ProductList.vue";
+import ProductList from "../components/Product/ProductList.vue";
 import products from "@/static/data/product.json";
 
 export default {
