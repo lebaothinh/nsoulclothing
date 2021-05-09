@@ -110,7 +110,7 @@
 
 <script>
 import ProductList from '../components/Product/ProductList.vue';
-import products from "/data/product.json";
+import products from "@/static/data/product.json";
 
 export default {
   components: { ProductList },
