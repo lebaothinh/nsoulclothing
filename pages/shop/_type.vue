@@ -32,7 +32,6 @@ import products from "@/static/data/product.json";
 
 export default {
   created() {
-    console.log(this.$route)
   },
   data: () => ({
     data: products,
