@@ -155,6 +155,10 @@ export default {
   methods: {
     onOrder: function (e) {
       e.preventDefault();
+      if (!this.cart.length) {
+        swal("Không có sản phẩm nào!", "Vui lòng thêm sản phẩm vào giỏ hàng!", "info");
+        return;
+      }
       let products = "";
       this.cart.forEach((product, index) => {
         products += `${index + 1}. - ID:${product.product.id} | SKU: ${

@@ -1,5 +1,10 @@
 <template>
   <div>
+    <head>
+      <title>{{product.title}}</title>
+      <meta name="description" :content="product.subTitle"/>
+      <meta name="og:image" :content="'images/products/' + product.images[0]"/>
+    </head>
     <!-- Content page -->
     <section class="bg0 p-t-104 p-b-116">
       <product-detail :isDetail="true" :product="product" />

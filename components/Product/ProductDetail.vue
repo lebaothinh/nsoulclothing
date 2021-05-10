@@ -304,6 +304,9 @@ export default {
   },
   methods: {
     addToCart() {
+      if (this.isView) {
+        return;
+      }
       if (!this.size) {
         swal('Vui lòng chọn một size',"Thiếu thông tin!", "info");
         return
@@ -415,6 +418,7 @@ export default {
   props: {
     product: Product,
     isDetail: Boolean,
+    isView: Boolean
   },
 };
 </script>

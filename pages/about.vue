@@ -11,7 +11,7 @@
 	<!-- Content page -->
 	<section class="bg0 p-t-75 p-b-120">
 		<div class="container">
-			<div class="row p-b-148">
+			<!-- <div class="row p-b-148">
 				<div class="col-md-7 col-lg-8">
 					<div class="p-t-7 p-r-85 p-r-15-lg p-r-0-md">
 						<h3 class="mtext-111 cl2 p-b-16">
@@ -39,17 +39,17 @@
 						</div>
 					</div>
 				</div>
-			</div>
+			</div> -->
 			
 			<div class="row">
 				<div class="order-md-2 col-md-7 col-lg-8 p-b-30">
 					<div class="p-t-7 p-l-85 p-l-15-lg p-l-0-md">
 						<h3 class="mtext-111 cl2 p-b-16">
-							Our Mission
+							Sứ Mệnh
 						</h3>
 
 						<p class="stext-113 cl6 p-b-26">
-							Mauris non lacinia magna. Sed nec lobortis dolor. Vestibulum rhoncus dignissim risus, sed consectetur erat. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nullam maximus mauris sit amet odio convallis, in pharetra magna gravida. Praesent sed nunc fermentum mi molestie tempor. Morbi vitae viverra odio. Pellentesque ac velit egestas, luctus arcu non, laoreet mauris. Sed in ipsum tempor, consequat odio in, porttitor ante. Ut mauris ligula, volutpat in sodales in, porta non odio. Pellentesque tempor urna vitae mi vestibulum, nec venenatis nulla lobortis. Proin at gravida ante. Mauris auctor purus at lacus maximus euismod. Pellentesque vulputate massa ut nisl hendrerit, eget elementum libero iaculis.
+							Với mong muốn mang đến cho cô gái hiện đại sự tự tin, phóng khoáng trong nhịp sống của thời đại, N soul sẽ giúp bạn chọn lựa phong cách thời trang đơn giản, gần gũi, giữ trong mình nét tinh tế thời thượng.
 						</p>
 
 						<div class="bor16 p-l-29 p-b-9 m-t-22">

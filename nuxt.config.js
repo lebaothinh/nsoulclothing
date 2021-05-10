@@ -6,14 +6,14 @@ export default {
   },
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'CozaShop',
+    title: 'NSoulClothing Shop',
     htmlAttrs: {
-      lang: 'en'
+      lang: 'vi'
     },
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' }
+      { hid: 'NSoulClothing Shop', name: 'Ghé shop tại số 10, đường số 1, khu phố 5, phường Hiệp Bình Chánh, quận Thủ Đức, Hồ Chí Minh, Việt Nam', content: 'Với mong muốn mang đến cho cô gái hiện đại sự tự tin, phóng khoáng trong nhịp sống của thời đại, N soul sẽ giúp bạn chọn lựa phong cách thời trang đơn giản, gần gũi, giữ trong mình nét tinh tế thời thượng.' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }

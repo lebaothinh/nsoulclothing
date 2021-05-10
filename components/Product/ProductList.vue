@@ -7,7 +7,7 @@
         }" :product="pro" ></product-card>
     </div>
     <Modal :isShow="isShowModal" @close="() => isShowModal = false">
-        <product-detail :product="selectedProduct ? selectedProduct : data.length > 0 ? this.data[0] : {}"></product-detail>
+        <product-detail :isDetail="isDetail" :isView="isView" :product="selectedProduct ? selectedProduct : data.length > 0 ? this.data[0] : {}"></product-detail>
     </Modal>
   </div>
 </template>
@@ -20,6 +20,8 @@ export default {
   components: { Modal, ProductDetail, ProductCard },
   props: {
     data: Array,
+    isDetail: Boolean,
+    isView: Boolean
   },
   data: () => ({
       selectedProduct: null,

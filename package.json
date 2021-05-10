@@ -1,8 +1,8 @@
 {
-  "name": "CozaShop",
+  "name": "NSoulClothingShop",
   "version": "1.0.0",
   "private": true,
-  "homepage": "https://lebaothinh.github.io/nsoulclothing.github.io",
+  "homepage": "https://lebaothinh.github.io/nsoulclothing",
   "scripts": {
     "dev": "nuxt",
     "build": "nuxt build",

@@ -7,7 +7,7 @@
           <nav class="limiter-menu-desktop container" style="min-height: unset">
             <!-- Logo desktop -->
             <nuxt-link to="/" class="logo">
-              <img src="/images/icons/logo-01.png" alt="IMG-LOGO" />
+              <img src="/images/icons/logo.png" alt="IMG-LOGO" />
             </nuxt-link>
 
             <!-- Menu desktop -->
@@ -54,7 +54,7 @@
         <!-- Logo moblie -->
         <div class="logo-mobile">
           <NuxtLink to="/"
-            ><img src="/images/icons/logo-01.png" alt="IMG-LOGO"
+            ><img src="/images/icons/logo.png" alt="IMG-LOGO"
           /></NuxtLink>
         </div>
 
