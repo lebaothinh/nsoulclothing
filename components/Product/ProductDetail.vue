@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="product">
     <div class="container">
       <div class="row">
         <div class="col-md-6 col-lg-7 p-b-30">
@@ -11,40 +11,43 @@
               <div class="slick3 gallery-lb">
                 <template v-if="product.imageSrc">
                   <div
-                  v-for="(image, i) in product.imageSrc || []"
-                  :key="i"
-                  class="item-slick3"
-                  :data-thumb="image"
-                >
-                  <div class="wrap-pic-w pos-relative">
-                    <img :src="image" alt="IMG-PRODUCT" />
+                    v-for="(image, i) in product.imageSrc || []"
+                    :key="i"
+                    class="item-slick3"
+                    :data-thumb="image"
+                  >
+                    <div class="wrap-pic-w pos-relative">
+                      <img :src="image" alt="IMG-PRODUCT" />
 
-                    <a
-                      class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
-                    >
-                      <i class="fa fa-expand"></i>
-                    </a>
+                      <a
+                        class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
+                      >
+                        <i class="fa fa-expand"></i>
+                      </a>
+                    </div>
                   </div>
-                </div>
                 </template>
                 <template v-else>
                   <div
-                  v-for="(image, i) in product.images || []"
-                  :key="i"
-                  class="item-slick3"
-                  :data-thumb="'images/products/' + image"
-                >
-                  <div class="wrap-pic-w pos-relative">
-                    <img :src="'images/products/' + image" alt="IMG-PRODUCT" />
+                    v-for="(image, i) in product.images || []"
+                    :key="i"
+                    class="item-slick3"
+                    :data-thumb="'images/products/' + image"
+                  >
+                    <div class="wrap-pic-w pos-relative">
+                      <img
+                        :src="'images/products/' + image"
+                        alt="IMG-PRODUCT"
+                      />
 
-                    <a
-                      class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
-                      :href="'images/products/' + image"
-                    >
-                      <i class="fa fa-expand"></i>
-                    </a>
+                      <a
+                        class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
+                        :href="'images/products/' + image"
+                      >
+                        <i class="fa fa-expand"></i>
+                      </a>
+                    </div>
                   </div>
-                </div>
                 </template>
               </div>
             </div>
@@ -53,12 +56,18 @@
 
         <div class="col-md-6 col-lg-5 p-b-30">
           <div class="p-r-50 p-t-5 p-lr-0-lg">
-            <h4 class="mtext-105 cl2 js-name-detail p-b-14">
-              {{ product.title || "Chưa đặt tên" }}
-            </h4>
+            <nuxt-link :to="'/product?id=' + product.id">
+              <h4 class="mtext-105 cl2 js-name-detail p-b-14">
+                {{ product.title || "Chưa đặt tên" }}
+              </h4>
+            </nuxt-link>
 
             <span class="mtext-106 cl2">
-              {{ Number(product.price).toLocaleString()+ " VNĐ" || "Thương lượng" }}
+              {{
+                product && product.price
+                  ? Number(product.price).toLocaleString() + " VNĐ"
+                  : "Giá chưa có"
+              }}
             </span>
 
             <p class="stext-102 cl3 p-t-23">
@@ -177,7 +186,12 @@
               >
                 <i class="fa fa-instagram"></i>
               </a>
-        
+
+              <div
+                class="fb-share-button"
+                :data-href="'/product?id='+ product.id"
+                data-layout="button_count"
+              ></div>
             </div>
           </div>
         </div>
@@ -288,6 +302,10 @@
         Thể Loại: {{ product.categories && product.categories.join(", ") }}
       </span>
     </div>
+  </div>
+  <div v-else>
+    <h1 class="text-center m-b-20">Sản Phẩm Này Không Tồn Tại</h1>
+    <nuxt-link to="/" class="m-t-50 text-center"><h3>Quay về trang chủ</h3></nuxt-link>
   </div>
 </template>
 

@@ -3,7 +3,11 @@
     <div
       :key="pro.id"
       v-for="(pro, index) in data"
-      :class="col ? `col-sm-12 col-md-${12/col}` : 'col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item'"
+      :class="
+        col
+          ? `col-sm-12 col-md-${12 / col}`
+          : 'col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item'
+      "
     >
       <product-card
         @quickView="
@@ -19,7 +23,7 @@
             onRemove(index);
           }
         "
-        @click.native="() => onCardClick(index)"
+        @cardClick="() => onCardClick(index)"
       ></product-card>
     </div>
     <Modal :isShow="isShowModal" @close="() => (isShowModal = false)">
@@ -44,7 +48,7 @@ export default {
     isDetail: Boolean,
     isView: Boolean,
     isRemove: Boolean,
-    col: Number
+    col: Number,
   },
   data() {
     return {
@@ -57,7 +61,11 @@ export default {
       this.$emit("removeProduct", index);
     },
     onCardClick: function (index) {
-      this.$emit("clickProduct", index);
+      if (this.isView) {
+        this.$emit("clickProduct", index);
+        return;
+      }
+      this.$router.push('/product?id='+this.data[index].id)
     },
   },
 };

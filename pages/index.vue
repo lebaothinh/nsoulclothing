@@ -120,9 +120,9 @@ export default {
   data() {
     return {
       data: [...products].slice(
-        [...products].length - 9,
-        [...products].length - 1
-      ),
+        [...products].length - 8,
+        [...products].length
+      ).reverse(),
     };
   },
   mounted() {

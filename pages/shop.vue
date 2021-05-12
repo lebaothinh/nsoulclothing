@@ -56,7 +56,7 @@ export default {
     }
   },
   data: () => ({
-    data: products,
+    data: [...products].reverse(),
     isSelectAll: -1,
     isClientSide: typeof window !== "undefined",
   }),

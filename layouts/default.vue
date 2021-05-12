@@ -192,7 +192,7 @@
               @click="onCloseCart"
               to="/cart"
               class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10"
-              ><span @click="() => onCloseCart()">THANH TOÁN</span>
+              ><span @click="() => onCloseCart()">ĐI ĐẾN THANH TOÁN</span>
             </nuxt-link>
           </div>
         </div>
