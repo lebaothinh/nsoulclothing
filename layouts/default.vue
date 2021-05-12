@@ -170,7 +170,7 @@
                 </a>
 
                 <span class="header-cart-item-info">
-                  {{ product.amount }} x {{ product.product.price }}
+                  {{ product.amount }} x {{ Number(product.product.price).toLocaleString() }}
                 </span>
               </div>
             </li>
@@ -182,7 +182,7 @@
             {{
               cart
                 .map((p) => Number(p.product.price.replace(/[^0-9.-]+/g, "")))
-                .reduce((a, b) => a + b, 0)
+                .reduce((a, b) => a + b, 0).toLocaleString()
             }}
             VNĐ
           </div>

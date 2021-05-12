@@ -2,9 +2,38 @@
   <div class="block2">
     <div class="block2-pic hov-img0">
       <img
+        v-if="isRemove"
+        @click="() => this.$emit('onRemove')"
+        src="/images/icons/icon-close.png"
+        alt="CLOSE"
+        style="
+          position: absolute;
+          background: #333;
+          border-radius: 50%;
+          top: 5px;
+          right: 5px;
+          height: 30px;
+          z-index: 10;
+          width: 30px;
+          cursor: pointer;
+        "
+      />
+      <img
+        v-if="product.imageSrc"
         style="height: 344px; object-fit: cover"
         :src="
-          product && product.images ? '/images/products/'+product.images[0] : '/default.jpg'
+          product.imageSrc[0] ? product.imageSrc[0] : '/default.jpg'
+        "
+        alt="IMG-PRODUCT"
+      />
+      <img
+        v-else
+        style="height: 344px; object-fit: cover"
+        :src="
+          product && product.images
+              && product.images[0] ?
+               '/images/products/' + product.images[0]
+            : '/default.jpg'
         "
         alt="IMG-PRODUCT"
       />
@@ -29,11 +58,11 @@
           :to="`/product?id=${product ? product.id : null}`"
           class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6"
         >
-          {{ product ? product.title : "No Title" }}
+          {{ product ? product.title : "Chưa đặt tên" }}
         </NuxtLink>
 
         <span class="stext-105 cl3">
-          {{ product ? product.price : "Negosiate" }}
+          {{ product ? Number(product.price).toLocaleString() + ' VNĐ' : "Thương lượng" }}
         </span>
       </div>
 
@@ -74,6 +103,7 @@ export const Product = {
 export default {
   props: {
     product: Product,
+    isRemove: Boolean
   },
 };
 </script>

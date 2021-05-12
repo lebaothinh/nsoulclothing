@@ -32,7 +32,7 @@
                       `(Size ${product.size}, ${product.color})`
                     }}
                   </td>
-                  <td class="column-3">{{ product.product.price }}</td>
+                  <td class="column-3">{{ Number(product.product.price).toLocaleString() }}</td>
                   <td class="column-4">
                     <div class="wrap-num-product flex-w m-l-auto m-r-0">
                       <div
@@ -59,8 +59,8 @@
                   </td>
                   <td class="column-5">
                     {{
-                      product.amount *
-                      Number(product.product.price.replace(/[^0-9.-]+/g, ""))
+                      Number(product.amount *
+                      Number(product.product.price.replace(/[^0-9.-]+/g, ""))).toLocaleString()
                     }}
                   </td>
                 </tr>
@@ -75,7 +75,8 @@
 							</div> -->
 
               <div class="cl2">
-                Tổng Tiền: <b>{{ getTotal }}VNĐ</b> (Chưa tính phí ship)
+                Tổng Tiền: <b>{{ getTotal }} VNĐ</b> (Chưa tính phí ship)
+                <p class="m-t-7">Sau khi khi đặt hàng, shop sẽ liên hệ lại với bạn để xác nhận đơn hàng</p>
               </div>
             </div>
           </div>
@@ -125,7 +126,7 @@
               </div>
 
               <div class="size-209 p-t-1">
-                <span class="mtext-110 cl2"> {{ getTotal }}VNĐ </span>
+                <span class="mtext-110 cl2"> {{ getTotal + ' VNĐ' }}</span>
               </div>
             </div>
 
@@ -161,11 +162,9 @@ export default {
       }
       let products = "";
       this.cart.forEach((product, index) => {
-        products += `${index + 1}. - ID:${product.product.id} | SKU: ${
-          product.product.sku
-        } - ${product.product.title} (Size ${product.size}, ${product.color} ${
+        products += `${index + 1}.ID: ${product.product.id} - ${product.product.title} (Size ${product.size}, ${product.color} ${
           product.amount
-        } cái)\n`;
+        } cái) | ${this.$config.baseUrl}/product?id=${product.product.id}  \n` ;
       });
 
       if (this.name && this.phoneNumber && this.address) {
@@ -176,17 +175,20 @@ export default {
             ["Địa chỉ"]: this.address,
             ["Sản phẩm đặt mua"]: products,
           })
-          .then(function (response) {
+          .then((response) => {
             swal(
               "Đặt Hàng Thành Công!",
               "Cảm ơn bạn đã đặt hàng, NSoulClothing sẽ liên hệ lại với bạn để xác nhận đơn hàng!",
               "success"
             );
+            localStorage.removeItem('CozaShopCart')
+            this.$root.$emit('cartChange');
+            this.$router.push('/shop')
           })
           .catch(function (error) {
             swal(
               "Gửi thất bại!",
-              "Vui lòng chat với với chúng tôi ngay bên dưới để đặt hàng nhanh!",
+              "Vui lòng chat Messenger với với chúng tôi ngay bên dưới phải để đặt hàng nhanh!",
               "info"
             );
           });

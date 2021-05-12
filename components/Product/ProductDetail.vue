@@ -9,7 +9,26 @@
               <div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
 
               <div class="slick3 gallery-lb">
-                <div
+                <template v-if="product.imageSrc">
+                  <div
+                  v-for="(image, i) in product.imageSrc || []"
+                  :key="i"
+                  class="item-slick3"
+                  :data-thumb="image"
+                >
+                  <div class="wrap-pic-w pos-relative">
+                    <img :src="image" alt="IMG-PRODUCT" />
+
+                    <a
+                      class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
+                    >
+                      <i class="fa fa-expand"></i>
+                    </a>
+                  </div>
+                </div>
+                </template>
+                <template v-else>
+                  <div
                   v-for="(image, i) in product.images || []"
                   :key="i"
                   class="item-slick3"
@@ -26,6 +45,7 @@
                     </a>
                   </div>
                 </div>
+                </template>
               </div>
             </div>
           </div>
@@ -34,11 +54,11 @@
         <div class="col-md-6 col-lg-5 p-b-30">
           <div class="p-r-50 p-t-5 p-lr-0-lg">
             <h4 class="mtext-105 cl2 js-name-detail p-b-14">
-              {{ product.title || "No Title" }}
+              {{ product.title || "Chưa đặt tên" }}
             </h4>
 
             <span class="mtext-106 cl2">
-              {{ product.price || "Negosiate" }}
+              {{ Number(product.price).toLocaleString()+ " VNĐ" || "Thương lượng" }}
             </span>
 
             <p class="stext-102 cl3 p-t-23">
@@ -262,7 +282,7 @@
       </div>
     </div>
     <div v-if="isDetail" class="bg6 flex-c-m flex-w size-302 m-t-73 p-tb-15">
-      <span class="stext-107 cl6 p-lr-25"> SKU: {{ product.sku }} </span>
+      <span class="stext-107 cl6 p-lr-25"> ID: {{ product.id }} </span>
 
       <span class="stext-107 cl6 p-lr-25">
         Thể Loại: {{ product.categories && product.categories.join(", ") }}
@@ -275,30 +295,30 @@
 import { Product } from "./ProductCard";
 import Vue from "vue";
 Vue.directive("select2", {
-      inserted(el) {
-        $(el).on("select2:select", () => {
-          const event = new Event("change", {
-            bubbles: true,
-            cancelable: true,
-          });
-          el.dispatchEvent(event);
-        });
-
-        $(el).on("select2:unselect", () => {
-          const event = new Event("change", {
-            bubbles: true,
-            cancelable: true,
-          });
-          el.dispatchEvent(event);
-        });
-      },
+  inserted(el) {
+    $(el).on("select2:select", () => {
+      const event = new Event("change", {
+        bubbles: true,
+        cancelable: true,
+      });
+      el.dispatchEvent(event);
     });
+
+    $(el).on("select2:unselect", () => {
+      const event = new Event("change", {
+        bubbles: true,
+        cancelable: true,
+      });
+      el.dispatchEvent(event);
+    });
+  },
+});
 export default {
   data() {
     return {
       isSlicked: false,
-      size:'',
-      color: '',
+      size: "",
+      color: "",
       amount: 1,
     };
   },
@@ -308,17 +328,22 @@ export default {
         return;
       }
       if (!this.size) {
-        swal('Vui lòng chọn một size',"Thiếu thông tin!", "info");
-        return
+        swal("Vui lòng chọn một size", "Thiếu thông tin!", "info");
+        return;
       }
       if (!this.color) {
-        swal('Vui lòng chọn một màu',"Thiếu thông tin!", "info");
-        return
+        swal("Vui lòng chọn một màu", "Thiếu thông tin!", "info");
+        return;
       }
       try {
         let cart = JSON.parse(localStorage.getItem("CozaShopCart")) || [];
 
-        let _product = cart.find((p) => (p.product.id == this.product.id && p.color == this.color && p.size == this.size));
+        let _product = cart.find(
+          (p) =>
+            p.product.id == this.product.id &&
+            p.color == this.color &&
+            p.size == this.size
+        );
         if (
           _product &&
           _product.size == this.size &&
@@ -336,8 +361,8 @@ export default {
         }
 
         localStorage.setItem("CozaShopCart", JSON.stringify(cart));
-        swal('Thêm Vào Giỏ Hàng',"Thành Công!", "success");
-        this.$root.$emit('cartChange')
+        swal("Thêm Vào Giỏ Hàng", "Thành Công!", "success");
+        this.$root.$emit("cartChange");
       } catch (e) {}
     },
   },
@@ -382,6 +407,12 @@ export default {
     this.isSlicked = true;
   },
   mounted() {
+    $(".js-select2").each(function () {
+      $(this).select2({
+        minimumResultsForSearch: 20,
+        dropdownParent: $(this).next(".dropDownSelect2"),
+      });
+    });
     $(".wrap-slick3").each(function () {
       $(this)
         .find(".slick3")
@@ -418,7 +449,7 @@ export default {
   props: {
     product: Product,
     isDetail: Boolean,
-    isView: Boolean
+    isView: Boolean,
   },
 };
 </script>

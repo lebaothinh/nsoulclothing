@@ -2,7 +2,7 @@ export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
   publicRuntimeConfig: {
-    baseUrl: 'localhost:3000/'
+    baseUrl: 'khutro.vn'
   },
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
